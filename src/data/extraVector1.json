@@ -3,13 +3,121 @@
   "features": [
     {
       "type": "Feature",
-      "properties": { "name": "Green Polyline" },
+      "properties": {
+        "name": "Raquena Landscape",
+        "description": "Regenera landscape in Peru",
+        "area": 12500
+      },
       "geometry": {
-        "type": "LineString",
+        "type": "Polygon",
         "coordinates": [
-          [-0.1, 51.51],
-          [-0.09, 51.52],
-          [-0.08, 51.51]
+          [
+            [-73.9592, -5.3258],
+            [-73.5592, -5.3258],
+            [-73.5592, -5.7258],
+            [-73.9592, -5.7258],
+            [-73.9592, -5.3258]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Pacurtambo Landscape",
+        "description": "Regenera landscape in Peru",
+        "area": 9800
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [-73.0814, -13.4392],
+            [-72.6814, -13.4392],
+            [-72.6814, -13.8392],
+            [-73.0814, -13.8392],
+            [-73.0814, -13.4392]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Machu Picchu Landscape",
+        "description": "Regenera landscape in Peru",
+        "area": 11200
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [-72.745, -12.9631],
+            [-72.345, -12.9631],
+            [-72.345, -13.3631],
+            [-72.745, -13.3631],
+            [-72.745, -12.9631]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Cañete Landscape",
+        "description": "Regenera landscape in Peru",
+        "area": 8700
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [-76.5864, -12.8778],
+            [-76.1864, -12.8778],
+            [-76.1864, -13.2778],
+            [-76.5864, -13.2778],
+            [-76.5864, -12.8778]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Abancay Landscape",
+        "description": "Regenera landscape in Peru",
+        "area": 10300
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [-73.0894, -13.4339],
+            [-72.6894, -13.4339],
+            [-72.6894, -13.8339],
+            [-73.0894, -13.8339],
+            [-73.0894, -13.4339]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Manu Landscape",
+        "description": "Regenera landscape in Peru",
+        "area": 15600
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [-71.2, -12.05],
+            [-70.8, -12.05],
+            [-70.8, -12.45],
+            [-71.2, -12.45],
+            [-71.2, -12.05]
+          ]
         ]
       }
     }

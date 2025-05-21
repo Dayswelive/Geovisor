@@ -3,10 +3,74 @@
   "features": [
     {
       "type": "Feature",
-      "properties": { "name": "Purple Point" },
+      "properties": {
+        "name": "Raquena Guardian",
+        "role": "Forest Protector",
+        "since": 2018
+      },
       "geometry": {
         "type": "Point",
-        "coordinates": [-0.087, 51.506]
+        "coordinates": [-73.7592, -5.5258]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Pacurtambo Guardian",
+        "role": "Biodiversity Monitor",
+        "since": 2019
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-72.8814, -13.6392]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Machu Picchu Guardian",
+        "role": "Cultural Heritage Protector",
+        "since": 2017
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-72.545, -13.1631]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Cañete Guardian",
+        "role": "Water Resource Manager",
+        "since": 2020
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-76.3864, -13.0778]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Abancay Guardian",
+        "role": "Sustainable Agriculture Advisor",
+        "since": 2019
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-72.8894, -13.6339]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Manu Guardian",
+        "role": "Wildlife Conservation Specialist",
+        "since": 2016
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-71.0, -12.25]
       }
     }
   ]
