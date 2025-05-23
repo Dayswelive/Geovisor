@@ -6,6 +6,7 @@ import BaseMap from "./BaseMap";
 import LayerToggle from "./LayerToggle";
 import Dashboard from "./Dashboard";
 import type { LayerKey } from "../utils/tileLayers";
+import NDVILegend from "./NDVILegend";
 
 const MapWrapper: React.FC = () => {
   const [selectedBaseLayer, setSelectedLayer] =
@@ -62,6 +63,7 @@ const MapWrapper: React.FC = () => {
         onAreaSelect={handleAreaSelect}
         onAreaCalculated={handleAreaCalculated}
       />
+      <NDVILegend />
       <Dashboard
         isOpen={isDashboardOpen}
         onClose={handleDashboardClose}
