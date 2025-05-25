@@ -8,7 +8,7 @@ import {
   TileLayer,
   GeoJSON,
   WMSTileLayer,
-  ImageOverlay,
+  // ImageOverlay,
   LayersControl,
   useMap,
   Marker,
@@ -24,6 +24,8 @@ import { SearchControl } from "./SearchControl";
 import countriesData from "../data/vectorData.json";
 import regeneraLandscapesData from "../data/extraVector1.json";
 import regeneraGuardiansData from "../data/extraVector2.json";
+
+import { WMTSTileLayer } from "../layers/WMTSTileLayer";
 
 // Define the interface for the props
 interface BaseMapProps {
@@ -70,6 +72,17 @@ const BaseMap: React.FC<BaseMapProps> = ({
   const [searchResult, setSearchResult] = useState<[number, number] | null>(
     null
   );
+  // const [ndviDate, setNdviDate] = useState<string>("2025-05-10");
+  const ndviDate = "2023-05-21";
+  useEffect(() => {
+    const container = document.querySelector(
+      ".leaflet-container"
+    ) as HTMLElement & { _leaflet_id?: number };
+
+    if (container && container._leaflet_id) {
+      container._leaflet_id = undefined;
+    }
+  }, []);
 
   // Handle search results
   const handleSearchResult = (result: [number, number]) => {
@@ -88,26 +101,6 @@ const BaseMap: React.FC<BaseMapProps> = ({
     };
   };
 
-  // Popup function for Regenera landscapes
-  // const onEachRegeneraFeature = (feature: any, layer: any) => {
-  //   if (feature.properties && feature.properties.name) {
-  //     layer.bindPopup(`
-  //       <div style="font-family: Arial, sans-serif; padding: 8px;">
-  //         <h3 style="margin: 0 0 8px 0; color: #059669;">${
-  //           feature.properties.name
-  //         }</h3>
-  //         <p style="margin: 0 0 5px 0;">${
-  //           feature.properties.description || ""
-  //         }</p>
-  //         ${
-  //           feature.properties.area
-  //             ? `<p style="margin: 0; font-weight: bold;">Area: ${feature.properties.area} hectares</p>`
-  //             : ""
-  //         }
-  //       </div>
-  //     `);
-  //   }
-  // };
   const onEachRegeneraFeature = (feature: any, layer: L.Layer) => {
     // retain your popup…
     if (feature.properties?.name) {
@@ -125,8 +118,11 @@ const BaseMap: React.FC<BaseMapProps> = ({
 
   return (
     <MapContainer
+      // key={selectedBaseLayer}
       center={[-9.19, -75.0152]}
       zoom={5}
+      minZoom={0}
+      maxZoom={14}
       style={{ height: "100vh", width: "100%" }}
     >
       {" "}
@@ -141,15 +137,9 @@ const BaseMap: React.FC<BaseMapProps> = ({
         </Marker>
       )}
       <LayersControl position="topright">
-        {Object.entries(TILE_LAYERS).map(([key, layer]) => (
-          <LayersControl.BaseLayer
-            key={key}
-            checked={layer.name === baseLayer.name}
-            name={layer.name}
-          >
-            <TileLayer url={layer.url} attribution={layer.attribution} />
-          </LayersControl.BaseLayer>
-        ))}
+        <LayersControl.BaseLayer checked name={baseLayer.name}>
+          <TileLayer url={baseLayer.url} attribution={baseLayer.attribution} />
+        </LayersControl.BaseLayer>
 
         {/* Vector Layers */}
         <LayersControl.Overlay name="Countries (vector)">
@@ -215,24 +205,25 @@ const BaseMap: React.FC<BaseMapProps> = ({
           />
         </LayersControl.Overlay>
 
-        <LayersControl.Overlay name="NDVI (NASA GIBS WMTS)">
-          <TileLayer
-            url="https://gibs.earthdata.nasa.gov/wmts/epsg3857/best/MODIS_Terra_NDVI/default/2025-05-22/250m/{z}/{y}/{x}.png"
-            attribution="Imagery courtesy NASA GIBS"
-            tileSize={256}
-            opacity={0.6}
-            maxZoom={8}
-            crossOrigin="anonymous"
+        <LayersControl.Overlay checked name="NDVI 300 m (Copernicus)">
+          <WMTSTileLayer
+            url="https://globalland.vito.be/wmts"
+            layer="clms_global_ndvi_300m_v2_10daily"
+            tilematrixSet="EPSG:3857"
+            format="image/png"
+            time={ndviDate}
+            opacity={0.7}
+            // style=""
           />
         </LayersControl.Overlay>
-        <LayersControl.Overlay name="Condition Index 2 (raster)">
-          <ImageOverlay
-            url="https://www.lib.utexas.edu/maps/historical/newark_nj_1922.jpg"
-            bounds={[
-              [40, -74],
-              [41, -73],
-            ]}
-            opacity={0.5}
+
+        <LayersControl.Overlay name="Soil organic-C stock 0–30 cm">
+          <WMSTileLayer
+            url="https://maps.isric.org/mapserv?map=/map/ocs.map"
+            layers="ocs_0-30cm_mean"
+            format="image/png"
+            transparent
+            opacity={0.7}
           />
         </LayersControl.Overlay>
 
@@ -255,7 +246,6 @@ const BaseMap: React.FC<BaseMapProps> = ({
             opacity={0.6}
           />
         </LayersControl.Overlay>
-
         <LayersControl.Overlay name="Condition accounting (raster)">
           <WMSTileLayer
             url="https://gibs.earthdata.nasa.gov/wms/epsg3857/best/wms.cgi"
