@@ -25,6 +25,7 @@ import regeneraLandscapesData from "../data/extraVector1.json";
 import regeneraGuardiansData from "../data/extraVector2.json";
 import { WMTSTileLayer } from "../layers/WMTSTileLayer";
 import { LayerLegends } from "./LayerLegends";
+import landscapeData from "../data/vector_current_landscape.json";
 
 // Define the interface for the props
 interface BaseMapProps {
@@ -195,11 +196,54 @@ const BaseMap: React.FC<BaseMapProps> = ({
     };
   }, []);
 
+  const currentLandscapeStyle = useCallback((feature: any) => {
+    return {
+      fillColor: "#F59E0B", // Amber color to distinguish from Regenera landscapes
+      weight: 3,
+      opacity: 1,
+      color: "#D97706",
+      dashArray: "5,5",
+      fillOpacity: 0.6,
+    };
+  }, []);
+
   const onEachRegeneraFeature = useCallback(
     (feature: any, layer: L.Layer) => {
       if (feature.properties?.name) {
         layer.bindPopup(`<strong>${feature.properties.name}</strong>`);
       }
+      layer.on("click", async () => {
+        const areaSqm = turf.area(feature);
+        const areaKm2 = areaSqm / 1e6;
+        onAreaCalculated(areaKm2);
+        onAreaSelect(feature);
+      });
+    },
+    [onAreaSelect, onAreaCalculated]
+  );
+
+  const onEachCurrentLandscapeFeature = useCallback(
+    (feature: any, layer: L.Layer) => {
+      const properties = feature.properties || {};
+      const popupContent = `
+      <div style="font-family: Arial, sans-serif;">
+        <h3 style="margin: 0 0 8px 0; color: #D97706;">${
+          properties.name || "Current Landscape"
+        }</h3>
+        ${
+          properties.description
+            ? `<p style="margin: 4px 0;">${properties.description}</p>`
+            : ""
+        }
+        ${
+          properties.area
+            ? `<p style="margin: 4px 0;"><strong>Area:</strong> ${properties.area} ha</p>`
+            : ""
+        }
+      </div>
+    `;
+      layer.bindPopup(popupContent);
+
       layer.on("click", async () => {
         const areaSqm = turf.area(feature);
         const areaKm2 = areaSqm / 1e6;
@@ -292,6 +336,14 @@ const BaseMap: React.FC<BaseMapProps> = ({
               <GeoJSON
                 data={regeneraGuardiansData as any}
                 style={{ color: "#8B5CF6", weight: 2, fillOpacity: 0.2 }}
+              />
+            </LayersControl.Overlay>
+
+            <LayersControl.Overlay checked name="Current Landscapes (vector)">
+              <GeoJSON
+                data={landscapeData as any}
+                style={currentLandscapeStyle}
+                onEachFeature={onEachCurrentLandscapeFeature}
               />
             </LayersControl.Overlay>
 
