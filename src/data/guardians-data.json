@@ -1,0 +1,90 @@
+{
+  "landscapes": {
+    "amazon_rainforest": [
+      {
+        "id": "guard_001",
+        "name": "Carlos Mendoza",
+        "role": "Forest Guardian",
+        "primaryContact": "+55 11 98765-4321",
+        "email": "carlos.mendoza@regenera.earth",
+        "country": "Brazil",
+        "region": "Amazon Basin",
+        "yearsOfService": 8,
+        "specialization": "Biodiversity Conservation",
+        "avatar": "/placeholder.svg?height=60&width=60",
+        "status": "Active"
+      },
+      {
+        "id": "guard_002",
+        "name": "Maria Santos",
+        "role": "Community Coordinator",
+        "primaryContact": "+55 11 87654-3210",
+        "email": "maria.santos@regenera.earth",
+        "country": "Brazil",
+        "region": "Amazon Basin",
+        "yearsOfService": 12,
+        "specialization": "Community Engagement",
+        "avatar": "/placeholder.svg?height=60&width=60",
+        "status": "Active"
+      }
+    ],
+    "atlantic_forest": [
+      {
+        "id": "guard_003",
+        "name": "João Silva",
+        "role": "Restoration Specialist",
+        "primaryContact": "+55 21 99876-5432",
+        "email": "joao.silva@regenera.earth",
+        "country": "Brazil",
+        "region": "Atlantic Forest",
+        "yearsOfService": 6,
+        "specialization": "Forest Restoration",
+        "avatar": "/placeholder.svg?height=60&width=60",
+        "status": "Active"
+      }
+    ],
+    "cerrado_savanna": [
+      {
+        "id": "guard_004",
+        "name": "Ana Rodriguez",
+        "role": "Wildlife Monitor",
+        "primaryContact": "+55 62 91234-5678",
+        "email": "ana.rodriguez@regenera.earth",
+        "country": "Brazil",
+        "region": "Cerrado",
+        "yearsOfService": 4,
+        "specialization": "Wildlife Conservation",
+        "avatar": "/placeholder.svg?height=60&width=60",
+        "status": "Active"
+      },
+      {
+        "id": "guard_005",
+        "name": "Pedro Oliveira",
+        "role": "Fire Prevention Coordinator",
+        "primaryContact": "+55 62 98765-4321",
+        "email": "pedro.oliveira@regenera.earth",
+        "country": "Brazil",
+        "region": "Cerrado",
+        "yearsOfService": 10,
+        "specialization": "Fire Management",
+        "avatar": "/placeholder.svg?height=60&width=60",
+        "status": "Active"
+      }
+    ],
+    "default": [
+      {
+        "id": "guard_006",
+        "name": "Elena Vasquez",
+        "role": "Regional Coordinator",
+        "primaryContact": "+51 1 987-654-321",
+        "email": "elena.vasquez@regenera.earth",
+        "country": "Peru",
+        "region": "Andes Mountains",
+        "yearsOfService": 15,
+        "specialization": "Regional Management",
+        "avatar": "/placeholder.svg?height=60&width=60",
+        "status": "Active"
+      }
+    ]
+  }
+}
