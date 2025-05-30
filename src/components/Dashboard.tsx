@@ -66,7 +66,7 @@ interface BaseComponentProps {
 
 interface ButtonProps extends BaseComponentProps {
   disabled?: boolean;
-  variant?: "default" | "outline" | "ghost";
+  variant?: "default" | "outline" | "ghost" | "orange";
   size?: "default" | "icon";
 }
 
@@ -158,28 +158,32 @@ const Badge: React.FC<BadgeProps> = ({
     </span>
   );
 };
-
 const Button: React.FC<ButtonProps> = ({
   children,
   onClick,
   disabled = false,
   className = "",
   style,
-  variant = "default",
+  variant = "orange",
   size = "default",
 }) => {
   const baseClasses =
-    "inline-flex items-center justify-center rounded-md font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none";
+    "inline-flex items-center justify-center rounded-lg font-semibold transition-all duration-300 ease-in-out focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-orange-300 focus-visible:ring-opacity-50 disabled:opacity-50 disabled:pointer-events-none shadow-lg transform hover:scale-105 active:scale-95";
 
   const variantClasses = {
-    default: "bg-emerald-600 text-white hover:bg-emerald-700",
-    outline: "border border-emerald-300 text-emerald-700 hover:bg-emerald-50",
-    ghost: "hover:bg-gray-100",
+    orange:
+      "bg-gradient-to-r from-orange-500 to-orange-600 text-white hover:from-orange-600 hover:to-orange-700 hover:shadow-xl border-0 shadow-orange-200",
+    default:
+      "bg-gradient-to-r from-emerald-500 to-emerald-600 text-white hover:from-emerald-600 hover:to-emerald-700 hover:shadow-xl shadow-emerald-200",
+    outline:
+      "border-2 border-orange-400 text-orange-600 hover:bg-orange-50 hover:border-orange-500 hover:text-orange-700 bg-white shadow-sm",
+    ghost:
+      "hover:bg-orange-50 text-orange-600 hover:text-orange-700 shadow-none",
   };
 
   const sizeClasses = {
-    default: "h-10 py-2 px-4",
-    icon: "h-10 w-10",
+    default: "h-12 py-3 px-6 text-base",
+    icon: "h-12 w-12",
   };
 
   return (
@@ -193,7 +197,71 @@ const Button: React.FC<ButtonProps> = ({
     </button>
   );
 };
+const ButtonWithCSS: React.FC<ButtonProps> = ({
+  children,
+  onClick,
+  disabled = false,
+  className = "",
+  style,
+  variant = "orange",
+  size = "default",
+}) => {
+  const buttonId = `classy-btn-${Math.random().toString(36).substr(2, 9)}`;
 
+  return (
+    <>
+      <style>{`
+        .${buttonId} {
+          display: inline-flex !important;
+          align-items: center !important;
+          justify-content: center !important;
+          border-radius: 12px !important;
+          font-weight: 600 !important;
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+          outline: none !important;
+          border: none !important;
+          cursor: pointer !important;
+          height: 48px !important;
+          padding: 12px 24px !important;
+          font-size: 16px !important;
+          background: linear-gradient(135deg, #f97316 0%, #ea580c 100%) !important;
+          color: white !important;
+          box-shadow: 0 10px 15px -3px rgba(249, 115, 22, 0.2), 0 4px 6px -2px rgba(249, 115, 22, 0.1) !important;
+          transform: scale(1) !important;
+        }
+        
+        .${buttonId}:hover:not(:disabled) {
+          background: linear-gradient(135deg, #ea580c 0%, #dc2626 100%) !important;
+          transform: scale(1.05) !important;
+          box-shadow: 0 20px 25px -5px rgba(249, 115, 22, 0.3), 0 10px 10px -5px rgba(249, 115, 22, 0.2) !important;
+        }
+        
+        .${buttonId}:active:not(:disabled) {
+          transform: scale(0.98) !important;
+        }
+        
+        .${buttonId}:disabled {
+          opacity: 0.5 !important;
+          cursor: not-allowed !important;
+          transform: scale(1) !important;
+        }
+        
+        .${buttonId}:focus {
+          outline: 4px solid rgba(249, 115, 22, 0.3) !important;
+          outline-offset: 2px !important;
+        }
+      `}</style>
+      <button
+        onClick={onClick}
+        disabled={disabled}
+        className={`${buttonId} ${className}`}
+        style={style}
+      >
+        {children}
+      </button>
+    </>
+  );
+};
 const Progress: React.FC<ProgressProps> = ({
   value,
   className = "",
@@ -465,14 +533,15 @@ const Dashboard: React.FC<DashboardProps> = ({
             </div>
 
             <div style={{ display: "flex", justifyContent: "flex-end" }}>
-              <Button
+              <ButtonWithCSS
                 onClick={onNextStep}
                 disabled={!selectedArea}
                 className="px-8 py-2"
+                variant="orange"
               >
                 Confirm Area{" "}
                 <ChevronRight size={16} style={{ marginLeft: "8px" }} />
-              </Button>
+              </ButtonWithCSS>
             </div>
           </div>
         );
@@ -617,17 +686,17 @@ const Dashboard: React.FC<DashboardProps> = ({
             </div>
 
             <div style={{ display: "flex", justifyContent: "space-between" }}>
-              <Button variant="outline" onClick={onPrevStep}>
+              <ButtonWithCSS variant="outline" onClick={onPrevStep}>
                 <ChevronLeft size={16} style={{ marginRight: "8px" }} /> Back
-              </Button>
-              <Button
+              </ButtonWithCSS>
+              <ButtonWithCSS
                 onClick={() => handleDataTypeSelect(selectedDataType!)}
                 disabled={!selectedDataType}
                 className="px-8"
               >
                 View Data{" "}
                 <ChevronRight size={16} style={{ marginLeft: "8px" }} />
-              </Button>
+              </ButtonWithCSS>
             </div>
           </div>
         );
@@ -864,11 +933,11 @@ const Dashboard: React.FC<DashboardProps> = ({
               </div>
 
               <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <Button variant="outline" onClick={onPrevStep}>
+                <ButtonWithCSS variant="outline" onClick={onPrevStep}>
                   <ChevronLeft size={16} style={{ marginRight: "8px" }} /> Back
                   to Categories
-                </Button>
-                <Button>Contact Guardians</Button>
+                </ButtonWithCSS>
+                <ButtonWithCSS>Contact Guardians</ButtonWithCSS>
               </div>
             </div>
           );
@@ -1640,11 +1709,11 @@ const Dashboard: React.FC<DashboardProps> = ({
                   paddingTop: "16px",
                 }}
               >
-                <Button variant="outline" onClick={onPrevStep}>
+                <ButtonWithCSS variant="outline" onClick={onPrevStep}>
                   <ChevronLeft size={16} style={{ marginRight: "8px" }} /> Back
                   to Categories
-                </Button>
-                <Button>Download Report</Button>
+                </ButtonWithCSS>
+                <ButtonWithCSS>Download Report</ButtonWithCSS>
               </div>
             </div>
           );
