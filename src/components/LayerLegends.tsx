@@ -35,7 +35,7 @@ const LEGEND_CONFIGS: Record<string, LegendConfig> = {
       { color: "#006400", label: "High Removals", value: "< -50" },
     ],
   },
-  "NDVI 300 m (Copernicus)": {
+  "🌱 NDVI 300m (Copernicus)": {
     title: "NDVI - Vegetation Health",
     unit: "Index (0-1)",
     description: "Normalized Difference Vegetation Index",
@@ -48,7 +48,7 @@ const LEGEND_CONFIGS: Record<string, LegendConfig> = {
       { color: "#006400", label: "Lush Vegetation", value: "0.8-1.0" },
     ],
   },
-  "Soil organic-C stock 0–30 cm": {
+  "🌱 Soil Organic Carbon (0-30cm)": {
     title: "Soil Organic Carbon Stock",
     unit: "tons C/ha",
     description: "Carbon stored in top 30cm of soil",
@@ -60,7 +60,7 @@ const LEGEND_CONFIGS: Record<string, LegendConfig> = {
       { color: "#8B4513", label: "Very High", value: "> 120" },
     ],
   },
-  "Biodiversity (GBIF Occurrences)": {
+  "🦋 Biodiversity (GBIF Occurrences)": {
     title: "Species Occurrence Density",
     unit: "occurrences/km²",
     description: "Density of recorded species observations",
